@@ -2355,6 +2355,9 @@ define(function (require) {
 
 			try {
 				executed = $wysiwygDoc[0].execCommand(command, false, param);
+                //hack fix for Normal size text in VT.
+                if( ( command || '' ).toLowerCase() === 'fontsize' && parseInt( param, 10) === 2 )
+                    normalizeFont();
 			} catch (ex) {}
 
 			// show error if execution failed and an error message exists
@@ -2364,6 +2367,11 @@ define(function (require) {
 			}
 
 			updateActiveButtons();
+
+        function normalizeFont()
+            {
+            $( "font[size=2]", $wysiwygDoc[0] ).removeAttr( 'size' ).css( 'font-size', '14px' );
+            }
 		};
 
 		/**
