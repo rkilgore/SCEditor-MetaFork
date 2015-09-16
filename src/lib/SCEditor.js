@@ -1413,6 +1413,12 @@ define(function (require) {
 					e.stopPropagation();
 				});
 
+            if( options.dropDownsUp )
+                {
+                var h = $dropdown.css( 'height' );
+                $dropdown.css( 'top', menuItem.position().top - menuItem.outerHeight() - parseInt( h, 10 ) );
+                }
+
 			// If try to focus the first input immediately IE will
 			// place the cursor at the start of the editor instead
 			// of focusing on the input.
