@@ -110,11 +110,6 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
-                        src: './emoticons/**',
-                        dest: "<%= meta.devDirectory %>"
-                    },
-                    {
-                        expand: true,
                         cwd: './src/',
                         src: 'jquery.sceditor.default.css',
                         dest: '<%= meta.devDirectory %>'
@@ -470,5 +465,7 @@ module.exports = function (grunt) {
         , 'autoprefixer:build'
         , 'cssmin:build'
         , 'copy:meta'
+        , 'clean:dist'
+        , 'clean:build'
     ] );
 };
