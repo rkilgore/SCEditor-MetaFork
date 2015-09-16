@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="themes/modern.min.css" type="text/css" media="all" />
+    <title></title>
+</head>
+<body>
+    <textarea style="width:300px;height:300px;" id="testbed"></textarea>
+    <script src="jquery.js"></script>
+    <script src="jquery.sceditor.xhtml.js"></script>
+    <script>
+        $( function() {
+            $( '#testbed' ).sceditor( {
+                plugins: 'xhtml',
+                style: 'jquery.sceditor.default.css',
+		        enablePasteFiltering: 1
+            } );
+        } );
+    </script>
+</body>
+</html>

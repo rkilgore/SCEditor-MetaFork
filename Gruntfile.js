@@ -6,6 +6,7 @@ module.exports = function (grunt) {
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+        meta: grunt.file.readJSON( 'metaConfig.json' ),
 
 		// Used for Sauce Labs. Creates a server for the
 		// unit tests to be served from.
@@ -99,6 +100,45 @@ module.exports = function (grunt) {
 		// Copy files into the distributable directory ready to be compressed
 		// into the ZIP archive
 		copy: {
+            meta: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: "./dist/development/",
+                        src: "jquery.sceditor.xhtml.js",
+                        dest: "<%= meta.devDirectory %>"
+                    },
+                    {
+                        expand: true,
+                        src: './emoticons/**',
+                        dest: "<%= meta.devDirectory %>"
+                    },
+                    {
+                        expand: true,
+                        cwd: './src/',
+                        src: 'jquery.sceditor.default.css',
+                        dest: '<%= meta.devDirectory %>'
+                    },
+                    {
+                        expand: true,
+                        cwd: './src/',
+                        src: 'index.html',
+                        dest: '<%= meta.devDirectory %>'
+                    },
+                    {
+                        expand: true,
+                        cwd: "./minified/",
+                        src: [ 'themes/**' ],
+                        dest: "<%= meta.devDirectory %>"
+                    },
+                    {
+                        expand: true,
+                        cwd: 'src/themes/icons/',
+                        src: '*.png',
+                        dest: '<%= meta.devDirectory %>/themes/'
+                    }
+                ]
+            },
 			dist: {
 				files: [
 					{
@@ -420,4 +460,15 @@ module.exports = function (grunt) {
 	grunt.registerTask('dev-upd', [
 		'devUpdate:main'
 	]);
+
+    grunt.registerTask( 'meta', [
+        'clean:dist'
+        , 'clean:build'
+        , 'webpack:dist'
+        , 'concat:dist'
+        , 'less:build'
+        , 'autoprefixer:build'
+        , 'cssmin:build'
+        , 'copy:meta'
+    ] );
 };

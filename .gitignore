@@ -1,5 +1,4 @@
-sceditor.sublime-project
-sceditor.sublime-workspace
+/.idea
 /node_modules
 /distributable
 /dist
